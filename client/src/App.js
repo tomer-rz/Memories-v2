@@ -17,8 +17,6 @@ const App = () => {
         dispatch(getPosts());
     }, [currentId, dispatch]);
 
-    console.log("testing github1");
-
     return (
         <Container maxWidth="lg">
             <AppBar className={classes.appBar} position="static" color="inherit">

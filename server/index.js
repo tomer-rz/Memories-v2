@@ -18,7 +18,6 @@ app.use("/posts", postRoutes);
 app.get("/", (req, res) => {
     res.send("Hello to memories API");
 });
-console.log("test");
 
 mongoose
     .connect(process.env.CONNECTION_URL)
