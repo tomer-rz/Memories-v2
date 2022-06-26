@@ -18,7 +18,7 @@ export default makeStyles({
         flexDirection: "column",
         justifyContent: "space-between",
         borderRadius: "15px",
-        height: "100%",
+        // height: "100%",
         position: "relative",
     },
     overlay: {
@@ -45,7 +45,7 @@ export default makeStyles({
         padding: "0 16px",
     },
     cardActions: {
-        padding: "0 16px 8px 16px",
+        padding: "8px 16px 8px 16px",
         display: "flex",
         justifyContent: "space-between",
     },

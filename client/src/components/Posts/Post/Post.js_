@@ -14,17 +14,17 @@ const Post = ({ post, setCurrentId }) => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("profile"));
 
-    const Likes = () => {
+    const BottomLikes = () => {
         if (post.likes.length > 0) {
             return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id)) ? (
                 <>
                     <ThumbUpAltIcon fontSize="small" />
-                    &nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+                    &nbsp;Like
                 </>
             ) : (
                 <>
                     <ThumbUpAltOutlined fontSize="small" />
-                    &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
+                    &nbsp;Like
                 </>
             );
         }
@@ -34,6 +34,23 @@ const Post = ({ post, setCurrentId }) => {
                 &nbsp;Like
             </>
         );
+    };
+
+    const TopLikes = () => {
+        if (post.likes.length > 0) {
+            return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id)) ? (
+                <>
+                    <ThumbUpAltIcon fontSize="small" />
+                    &nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+                </>
+            ) : (
+                <>
+                    <ThumbUpAltOutlined fontSize="small" />
+                    {/* &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"} */}
+                </>
+            );
+        }
+        return <></>;
     };
 
     return (
@@ -63,10 +80,15 @@ const Post = ({ post, setCurrentId }) => {
                     {post.message}
                 </Typography>
             </CardContent>
+            <CardActions className={classes.cardTopActions}>
+                <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
+                    <TopLikes />
+                </Button>
+            </CardActions>
             <Divider />
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
-                    <Likes />
+                    <BottomLikes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
                     <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
